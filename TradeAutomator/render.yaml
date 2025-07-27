@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: xauusd-trading-platform
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: OANDA_API_KEY
+        sync: false
+      - key: OANDA_ACCOUNT_ID
+        sync: false
+      - key: DATABASE_URL
+        sync: false
