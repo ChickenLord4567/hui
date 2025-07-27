@@ -18,7 +18,7 @@ jobs:
 
           # Skip if between 21:00-22:00 UTC any day
           if [ "$current_hour" -eq 21 ]; then
-            echo "Skipping between 21:00-22:00 UTC."
+            echo "[$(date -u)] Skipping: within 21:00–22:00 UTC downtime."
             exit 0
           fi
 
@@ -26,9 +26,11 @@ jobs:
           if { [ "$current_day" -eq 5 ] && [ "$current_hour" -ge 21 ]; } || \
              [ "$current_day" -eq 6 ] || \
              { [ "$current_day" -eq 7 ] && [ "$current_hour" -lt 22 ]; }; then
-            echo "Skipping weekend downtime window."
+            echo "[$(date -u)] Skipping: weekend downtime window."
             exit 0
           fi
 
       - name: Run cURL on Website
-        run: curl -I https://hui-2.onrender.com
+        run: |
+          echo "[$(date -u)] Pinging https://hui-2.onrender.com"
+          curl -I https://hui-2.onrender.com
